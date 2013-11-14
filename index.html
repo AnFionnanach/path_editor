@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Crazy Canvas</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<style>
+			canvas {
+				border: 1px solid black
+			}
+		</style>
+
+		<script src="grid.js"></script>
+		<script src="dancers.js"></script>
+
+		<script>
+            var gridStep = 15;
+            var floorWidth, floorHeight;
+            var dancerWidth = dancerHeight = gridStep * 2;
+            var offsetX = dancerWidth / 2 - 1;
+            var offsetY = dancerHeight / 2 - 1;
+
+            function init() {
+                danceFloor = document.getElementById('danceFloor');
+                floorWidth = danceFloor.width;
+                floorHeight = danceFloor.height;
+
+                context = danceFloor.getContext('2d');
+
+                drawGrid();
+                drawDancers();
+            }
+		</script>
+	</head>
+
+	<body onLoad="init();">
+		<div>
+			<canvas id="danceFloor" width="600" height="600"></canvas>
+		</div>
+		<div  id="control_panel"></div>
+	</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<style>
+			body {
+				margin: 0px;
+				padding: 0px;
+			}
+			#container {
+			}
+			#controlPanel {
+				float: left;
+				width: 250px;
+			}
+			#canvas {
+				float: left;
+				width: 620px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id = "container">
+			<div id="canvas"></div>
+			<script src="lib/kinetic-v4.7.2.js"></script>
+			<script src="kinetic_dancers.js"></script>
+			<script defer="defer">
+                var stage = new Kinetic.Stage({
+                    container : 'canvas',
+                    width : 600,
+                    height : 600
+                });
+
+                var positions = [];
+
+                var gridStep = 10;
+
+                var animLayer = new Kinetic.Layer();
+                var staticLayer = new Kinetic.Layer();
+
+                // map out the grid
+                for (var i = -1; i < 600; i = i + gridStep) {
+                    for (var j = -1; j < 600; j = j + gridStep) {
+                        staticLayer.add(new Kinetic.Rect({
+                            x : i,
+                            y : j,
+                            width : 1,
+                            height : 1,
+                            fill : 'black'
+                        }));
+                    }
+                }
+
+                // highlight the key positions
+                for (var i = 0; i < 7; i++) {
+                    for (var j = 0; j < 8; j++) {
+                        staticLayer.add(new Kinetic.Rect({
+                            x : dancerWidth * 5 + dancerHeight * i / 2,
+                            y : dancerHeight * 1.5 + Math.floor(dancerHeight * j * 1.3333),
+                            width : 3,
+                            height : 3,
+                            fill : 'purple'
+                        }));
+                    }
+                }
+
+                // add the dancers
+                for (var i = 0; i < dancers.length; i++) {
+                    animLayer.add(dancers[i].shape);
+                }
+
+                stage.add(animLayer).add(staticLayer);
+
+                // reset the positions
+                function clearPositions() {
+                    positions = [];
+                    for (var i = 0; i < 8; i++) {
+                        dancers[i].shape.setPosition(startPositions[i]);
+                    }
+                    animLayer.draw();
+                    document.getElementById("bar").value = "1";
+                }
+
+                // save the current position
+                function savePositions() {
+                    var barElement = document.getElementById("bar");
+                    var bar = parseInt(barElement.value);
+                    var currentPositions = [];
+                    for (var i = 0; i < dancers.length; i++) {
+                        currentPositions[i] = {
+                            x : dancers[i].shape.getPosition().x,
+                            y : dancers[i].shape.getPosition().y
+                        };
+                    }
+                    positions[bar] = currentPositions;
+                    barElement.value = (bar + 1).toString();
+                }
+                
+                function replay() {
+                	
+                }
+
+			</script>
+			<div id="controlPanel" style="float: left left-margin=650px">
+				<button onclick="clearPositions()">
+					Reset!
+				</button>
+				<br/>
+				<label for="name">Name:</label>
+				<input type="text" name="name"/>
+				<br/>
+				<label for="bar">Bar:</label>
+				<input type="number" min="1" max="96" step="1" value="1" id="bar"/>
+				<br/>
+				<label for="beat">Beat:</label>
+				<input type="number" min="-1" step="1" value="-1" id="beat"/>
+				<br/>
+				<button onclick="savePositions()">
+					Save
+				</button>
+				<br/>
+				<button>
+					Replay
+				</button>
+				<br/>
+				<button>
+					Export
+				</button>
+			</div>
+		</div>
+	</body>
+</html>

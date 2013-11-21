@@ -110,6 +110,7 @@
 
                 function move() {
                     if (replayIndex < positions.length) {
+                        document.getElementById("bar").value = replayIndex;
                         for (var i = 0; i < dancers.length; i++) {
                             dancers[i].shape.setPosition(positions[replayIndex][i]);
                         }
@@ -121,12 +122,38 @@
                     };
                 }
 
+                function backward() {
+                    replayIndex = document.getElementById("bar").value - 1;
+                    if (replayIndex > 0) {
+                        for (var i = 0; i < dancers.length; i++) {
+                            dancers[i].shape.setPosition(positions[replayIndex][i]);
+                        }
+                        animLayer.draw();
+                        document.getElementById("bar").value = replayIndex;
+                    }
+                    if (replayIndex == 0) {
+                    	startingPositionsPlease();
+                    }
+                }
+
+                function forward() {
+                    replayIndex = parseInt(document.getElementById("bar").value) + 1;
+                    if (replayIndex < positions.length) {
+                        for (var i = 0; i < dancers.length; i++) {
+                            dancers[i].shape.setPosition(positions[replayIndex][i]);
+                        }
+                        animLayer.draw();
+                    }
+                    document.getElementById("bar").value = replayIndex;
+                }
+
                 function exportMovement() {
                     var movementName = document.getElementById("name").value;
 
                     exportString = "var " + movementName + " = [];\n";
 
                     for (var i = 1; i < positions.length; i++) {
+                        exportString = exportString + movementName + "[" + i + "] = [];\n";
                         for (var j = 0; j < dancers.length; j++) {
                             exportString = exportString + movementName + "[" + i + "]" + "[" + j + "] = {x: " + positions[i][j].x + ", y: " + positions[i][j].y + "};\n";
                         }
@@ -136,11 +163,18 @@
 
                 function importMovement() {
                     var code = document.getElementById("code").value;
+                    alert(code);
+                    eval(code);
+
                 }
 			</script>
 			<div id="controlPanel" style="float: left left-margin=650px">
+				<button onclick="startingPositionsPlease()">
+					Starting positions
+				</button>
+				<br/>
 				<button onclick="clearPositions()">
-					Reset!
+					Clear!
 				</button>
 				<br/>
 				<label for="name">Name:</label>
@@ -158,6 +192,13 @@
 				<br/>
 				<button onclick="replay()">
 					Replay
+				</button>
+				<br/>
+				<button onclick="backward()">
+					<<
+				</button>
+				<button onclick="forward()">
+					>>
 				</button>
 				<br/>
 				<button onclick="exportMovement()">

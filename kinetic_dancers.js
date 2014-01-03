@@ -42,7 +42,7 @@ dancer1L.shape = new Kinetic.Rect({
     offset : [dancerWidth / 2, dancerHeight / 2],
     width : dancerWidth,
     height : dancerHeight,
-    fill : 'blue',
+    fill : 'dodgerblue',
     draggable : true
 });
 dancer1L.shape.on('dragend', function() {
@@ -57,7 +57,7 @@ dancer2M.shape = new Kinetic.Rect({
     offset : [dancerWidth / 2, dancerHeight / 2],
     width : dancerWidth,
     height : dancerHeight,
-    fill : 'green',
+    fill : 'limegreen',
     draggable : true
 });
 dancer2M.shape.on('dragend', function() {
@@ -72,7 +72,7 @@ dancer2L.shape = new Kinetic.Rect({
     offset : [dancerWidth / 2, dancerHeight / 2],
     width : dancerWidth,
     height : dancerHeight,
-    fill : 'green',
+    fill : 'lime',
     draggable : true
 });
 dancer2L.shape.on('dragend', function() {
@@ -102,7 +102,7 @@ dancer3L.shape = new Kinetic.Rect({
     offset : [dancerWidth / 2, dancerHeight / 2],
     width : dancerWidth,
     height : dancerHeight,
-    fill : 'red',
+    fill : 'orange',
     draggable : true
 });
 dancer3L.shape.on('dragend', function() {
@@ -117,7 +117,7 @@ dancer4M.shape = new Kinetic.Rect({
     offset : [dancerWidth / 2, dancerHeight / 2],
     width : dancerWidth,
     height : dancerHeight,
-    fill : 'black',
+    fill : 'mediumpurple',
     draggable : true
 });
 dancer4M.shape.on('dragend', function() {
@@ -132,7 +132,7 @@ dancer4L.shape = new Kinetic.Rect({
     offset : [dancerWidth / 2, dancerHeight / 2],
     width : dancerWidth,
     height : dancerHeight,
-    fill : 'black',
+    fill : 'mediumorchid',
     draggable : true
 });
 dancer4L.shape.on('dragend', function() {
